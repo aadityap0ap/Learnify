@@ -1,0 +1,25 @@
+const express = require("express");
+
+const app = express();
+
+app.post("/user/signin",(req,res) => {
+
+})
+
+app.post("/user/signup",(req,res) => {
+
+})
+
+app.get("/user/purchases",(req,res) => {
+
+})
+
+app.post("/user/purchase",(req,res) => {
+
+})
+
+app.get("/courses",(req,res) => {
+
+})
+
+app.listen(3000);
