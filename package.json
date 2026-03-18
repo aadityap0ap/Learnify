@@ -1,0 +1,25 @@
+{
+  "name": "learnify",
+  "version": "1.0.0",
+  "description": "A full-stack course selling platform where users can explore, purchase, and learn from high-quality courses. Built with a focus on scalability, performance, and user experience.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aadityap0ap/Learnify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aadityap0ap/Learnify/issues"
+  },
+  "homepage": "https://github.com/aadityap0ap/Learnify#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.1"
+  }
+}
