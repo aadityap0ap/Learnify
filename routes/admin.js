@@ -12,9 +12,9 @@ adminRouter.post("/signup",async (req,res) => {
     try{
     const result = adminSchema.safeParse(req.body);
     if(!result.success){
-        res.status(404).json({
+        return res.status(404).json({
             message :"Invalid Input",
-            error : result.error.message
+            error : result.error.issues
         })
     }
     const {email,password,firstName,lastName} = result.data;
@@ -84,23 +84,36 @@ adminRouter.post("/addCourse",adminMiddleware,async(req,res) => {
     })
 })
 
-adminRouter.get("/updateCourse",adminMiddleware,async(req,res) => {
-    const adminId = userId;
+adminRouter.put("/updateCourse",adminMiddleware,async(req,res) => {
+    const adminId = req.userId;
     const {title,description,price,imageUrl,courseId} = req.body;
-    const course = await courseModel.findOne({
+    const course = await courseModel.findOneAndUpdate({
         _id : courseId,
         creatorId : adminId
-    },{
-        title : title,
-        description : description,
-        price : price,
-        imageUrl : imageUrl
+    },
+    {
+        title ,
+        description,
+        price ,
+        imageUrl 
+    },
+{
+    new : true
+})
+    res.json({
+        message : "Course Updated !",
+        courseId : course._id
     })
-
 })
 
-adminRouter.get("/course/bulk",(req,res) => {
-
+adminRouter.get("/course/bulk",adminMiddleware,async(req,res) => {
+    const adminId = req.userId;
+    const courses = await courseModel.find({
+        creatorId : adminId
+    })
+    res.json({
+        courses
+    })
 })
 
 module.exports ={
