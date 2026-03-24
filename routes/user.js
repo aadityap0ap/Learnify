@@ -5,9 +5,10 @@
 const {Router} = require("express");
 const jwt = require("jsonwebtoken");
 const { JWT_USER_PASSWORD } = require("../config");
-const {userModel} = require("../db");
+const {userModel, courseModel, purchaseModel} = require("../db");
 const bcrypt = require("bcrypt"); 
 const { userSchema } = require("../validations/userValidator");
+const { userMiddleWare } = require("../middleware/userMiddleware");
 const userRouter = Router();
 //Router() ..starts with capital letter but its still not a class it a function
 
@@ -92,8 +93,14 @@ userRouter.post("/signin",async (req,res) => {
     }
 })
 
-userRouter.get("/purchases",(req,res) => {
-
+userRouter.get("/purchases",userMiddleWare,async(req,res) => {
+    const userId = req.userId;
+    const Purchases = purchaseModel.find({
+        userId
+    })
+    res.json({
+        Purchases
+    })
 })
 
 module.exports ={
